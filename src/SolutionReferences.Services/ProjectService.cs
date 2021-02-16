@@ -15,7 +15,8 @@ namespace SolutionReferences.Services
         {
             _referenceService = new ReferenceService(this);
         }
-        public Project ParseVisualStudioProjectFile(string filePath)
+        
+        public Project GetVisualStudioProject(string filePath)
         {
             var xmlDocument = new System.Xml.XmlDocument();
             xmlDocument.Load(filePath);
@@ -95,7 +96,7 @@ namespace SolutionReferences.Services
             return projects;
         }
 
-        public Project ParseAureliaJsonProperty(Solution solution, string solutionFilePath, JsonElement packageJson)
+        public Project GetAureliaProject(Solution solution, string solutionFilePath, JsonElement packageJson)
         {
             var project = new Project();
             project.FilePath = Path.GetDirectoryName(solutionFilePath);

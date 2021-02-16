@@ -56,7 +56,7 @@ namespace SolutionReferences.Services
                     var solutionFolder = Path.GetDirectoryName(solution.FilePath);
                     var projectParts = line.GetProjectParts();
                     var projectFilePath = IOHelpers.CombineToNormalizedPath(solutionFolder, projectParts.ProjectFilePath);
-                    var project = _projectService.ParseVisualStudioProjectFile(projectFilePath);
+                    var project = _projectService.GetVisualStudioProject(projectFilePath);
                     project.Solution = solution;
                     solution.Projects.Add(project);
                 }
@@ -93,7 +93,7 @@ namespace SolutionReferences.Services
                         ;
                     // Single Project
                     var project = _projectService
-                        .ParseAureliaJsonProperty(solution, solution.FilePath, packageJson);
+                        .GetAureliaProject(solution, solution.FilePath, packageJson);
                     solution.Projects.Add(project);
                 }
                 // Angular

@@ -23,7 +23,7 @@ namespace SolutionReferences.Services
             var reference = new Reference();
             reference.ReferenceType = "Project";
             reference.FilePath = IOHelpers.CombineToNormalizedPath(projectFolderPath, element.GetAttribute("Include"));
-            reference.ProjectReference = _projectService.ParseVisualStudioProjectFile(reference.FilePath);
+            reference.ProjectReference = _projectService.GetVisualStudioProject(reference.FilePath);
             reference.Name = reference.ProjectReference.Name;
             reference.Version = reference.ProjectReference.AssemblyVersion;
             reference.Id = $"{reference.Name}-{reference.Version}";
