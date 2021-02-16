@@ -10,11 +10,11 @@ namespace SolutionReferences.Data
         public DbSet<Project> Projects { get; set; }
         public DbSet<Reference> References { get; set; }
 
-        public SolutionReferencesDb() { }
+        public SolutionReferencesDb(): this(connectionString: null) { }
 
         public SolutionReferencesDb(string connectionString)
         {
-            _connectionString = connectionString;
+            _connectionString = connectionString ?? "Data Source=solutionReferences.db";
         }
 
         public SolutionReferencesDb(DbContextOptions<SolutionReferencesDb> options) : base(options) { }
@@ -35,9 +35,9 @@ namespace SolutionReferences.Data
                 .ToTable("Projects")
                 .HasMany(a => a.Solutions);
 
-            modelBuilder.Entity<Reference>()
-                .ToTable("References")
-                .HasMany(a => a.ParentProjects);
+            modelBuilder.Entity<Project>()                
+                .HasMany(a => a.References)
+                .WithMany(a => a.Projects);
 
             modelBuilder.Entity<Reference>()
                 .ToTable("References")
