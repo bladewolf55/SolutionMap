@@ -2,8 +2,10 @@
 using System.IO;
 using System.Text.Json;
 using System.Xml;
+using SolutionReferences.Domain.Models;
+using SolutionReferences.Domain.Utilities;
 
-namespace SolutionReferences
+namespace SolutionReferences.Services
 {
     public class ProjectService
     {

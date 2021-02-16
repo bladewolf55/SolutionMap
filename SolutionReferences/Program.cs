@@ -19,8 +19,7 @@ namespace SolutionReferences
             var solutions = new List<Solution>();
 
             solutions = solutions.Concat(GetVisualStudioSolutions(rootPath)).ToList();
-            //solutions = solutions.Concat(GetNodeSolutions(rootPath)).ToList();
-
+            solutions = solutions.Concat(GetNodeSolutions(rootPath)).ToList();
 
             PrintSolutions(solutions);
             ReadLine();

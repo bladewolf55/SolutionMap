@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace SolutionReferences
+namespace SolutionReferences.Domain.Utilities
 {
     public static class JsonHelpers
     {

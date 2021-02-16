@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace SolutionReferences
+namespace SolutionReferences.Domain.Utilities
 {
     public static class IOHelpers
     {

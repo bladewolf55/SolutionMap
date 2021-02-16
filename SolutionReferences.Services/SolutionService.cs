@@ -2,8 +2,11 @@
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using SolutionReferences.Domain.Models;
+using SolutionReferences.Domain.Utilities;
 
-namespace SolutionReferences
+
+namespace SolutionReferences.Services
 {
     public class SolutionService
     {
