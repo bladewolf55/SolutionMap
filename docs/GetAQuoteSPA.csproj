@@ -1,0 +1,174 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Remove="src\components\ad-libs\ad-lib-navigation-buttons.ts" />
+		<None Remove="src\components\ad-libs\ad-lib-progress-bar.ts" />
+		<None Remove="src\debug\debugnav.ts" />
+		<None Remove="src\shells\certificate-of-insurance.ts" />
+		<None Remove="src\shells\commercial-trucking.ts" />
+		<None Remove="src\shells\geico-workers-compensation-insurance.ts" />
+		<None Remove="src\shells\handyman-business.ts" />
+		<None Remove="src\shells\hvac-contractor-business.ts" />
+		<None Remove="src\shells\landingdefault.ts" />
+		<None Remove="src\shells\lawyers-professional-liability.ts" />
+		<None Remove="src\shells\legal-malpractice.ts" />
+		<None Remove="src\shells\llc-business.ts" />
+		<None Remove="src\shells\media-liability.ts" />
+		<None Remove="src\shells\painters-business.ts" />
+		<None Remove="src\shells\rental-condo-townhouse.ts" />
+		<None Remove="src\styles\images\2000px-Geico_logo.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<TypeScriptCompile Remove="src\shells\GEICO-LP.ts" />
+		<None Remove="src\components\ad-lib-input-block-registry.ts" />
+		<None Remove="src\components\ad-lib-input-block.ts" />
+		<None Remove="src\components\box-selector.ts" />
+		<None Remove="src\components\eo-common-lob.ts" />
+		<None Remove="src\components\genlib.ts" />
+		<None Remove="src\components\pl-common-lob.ts" />
+		<None Remove="src\components\prop-n-lib.ts" />
+		<None Remove="src\components\salon.ts" />
+		<None Remove="src\components\small-business.ts" />
+		<None Remove="src\components\workers-comp.ts" />
+		<None Remove="src\shells\apartment-business.ts" />
+		<None Remove="src\shells\arch-eng-errors-and-omissions.ts" />
+		<None Remove="src\shells\arch-eng-professional-liability.ts" />
+		<None Remove="src\shells\beverage-business-insurance.ts" />
+		<None Remove="src\shells\bh-business-insurance.ts" />
+		<None Remove="src\shells\biberk-business-insurance.ts" />
+		<None Remove="src\shells\business-insurance.ts" />
+		<None Remove="src\shells\commercial-insurance.ts" />
+		<None Remove="src\shells\compete-business-insurance.ts" />
+		<None Remove="src\shells\condominiums-business-insurance.ts" />
+		<None Remove="src\shells\confectionery-business-insurance.ts" />
+		<None Remove="src\shells\construction-business.ts" />
+		<None Remove="src\shells\consultants-errors-and-omissions.ts" />
+		<None Remove="src\shells\consultants-professional-liability.ts" />
+		<None Remove="src\shells\cover-your-business-insurance.ts" />
+		<None Remove="src\shells\bakery-business.ts" />
+		<None Remove="src\shells\cleaning-business.ts" />
+		<None Remove="src\shells\consultants-errors-and-omissions.ts" />
+		<None Remove="src\shells\consultants-professional-liability.ts" />
+		<None Remove="src\shells\contractor-business.ts" />
+		<None Remove="src\shells\cpa-bookkeeper.ts" />
+		<None Remove="src\shells\delivery-services.ts" />
+		<None Remove="src\shells\electrician-business.ts" />
+		<None Remove="src\shells\estheticians-business.ts" />
+		<None Remove="src\shells\gas-station-insurance.ts" />
+		<None Remove="src\shells\home-inspector-errors-and-omissions.ts" />
+		<None Remove="src\shells\ins-agents-errors-and-omissions.ts" />
+		<None Remove="src\shells\ins-agents-professional-liability.ts" />
+		<None Remove="src\shells\landlord-insurance.ts" />
+		<None Remove="src\shells\landscaper-business.ts" />
+		<None Remove="src\shells\notary-errors-and-omissions.ts" />
+		<None Remove="src\shells\office-business.ts" />
+		<None Remove="src\shells\personal-trainer-professional-liability.ts" />
+		<None Remove="src\shells\photographers-business.ts" />
+		<None Remove="src\shells\property-insurance.ts" />
+		<None Remove="src\shells\real-estate-errors-and-omissions.ts" />
+		<None Remove="src\shells\real-estate-professional-liability.ts" />
+		<None Remove="src\shells\rental-dwelling-insurance.ts" />
+		<None Remove="src\shells\rental-property-insurance.ts" />
+		<None Remove="src\shells\repeat-business-insurance.ts" />
+		<None Remove="src\shells\restaurant-business.ts" />
+		<None Remove="src\shells\retail-business.ts" />
+		<None Remove="src\shells\salon-cosmetology.ts" />
+		<None Remove="src\shells\townhouse-business-insurance.ts" />
+		<None Remove="src\shells\travel-agent-errors-and-omissions.ts" />
+		<None Remove="auto-detailing-business-insurance.ts" />
+		<None Remove="auto-body-shop-business-insurance.ts" />
+		<None Remove="auto-repair-shop-business-insurance.ts" />
+		<None Remove="printing-company-professional-liability.ts" />
+		<None Remove="educators-professional-liability.ts" />
+		<None Remove="surveyor-professional-liability.ts" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<TypeScriptCompile Remove="src\shells\bh-workers-compensation.ts" />
+		<TypeScriptCompile Remove="src\shells\business-owners-policy.ts" />
+		<TypeScriptCompile Remove="src\shells\business-property.ts" />
+		<TypeScriptCompile Remove="src\shells\business-workers-compensation.ts" />
+		<TypeScriptCompile Remove="src\shells\errors-and-omissions.ts" />
+		<TypeScriptCompile Remove="src\shells\general-liability.ts" />
+		<TypeScriptCompile Remove="src\shells\hotel-business-insurance.ts" />
+		<TypeScriptCompile Remove="src\shells\liability-workers-compensation.ts" />
+		<TypeScriptCompile Remove="src\shells\professional-liability.ts" />
+		<TypeScriptCompile Remove="src\shells\workers-compensation.ts" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="..\LibSPA\SharedAppSettings\appsettings.Build.json" Link="appsettings\shared\appsettings.Build.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="..\LibSPA\SharedAppSettings\appsettings.Int.json" Link="appsettings\shared\appsettings.Int.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="..\LibSPA\SharedAppSettings\appsettings.Debug.json" Link="appsettings\shared\appsettings.Debug.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="..\LibSPA\SharedAppSettings\appsettings.DebugExt.json" Link="appsettings\shared\appsettings.DebugExt.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="..\LibSPA\SharedAppSettings\appsettings.Development.json" Link="appsettings\shared\appsettings.Development.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="..\LibSPA\SharedAppSettings\appsettings.json" Link="appsettings\shared\appsettings.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="..\LibSPA\SharedAppSettings\appsettings.Production.json" Link="appsettings\shared\appsettings.Production.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="..\LibSPA\SharedAppSettings\appsettings.Project.json" Link="appsettings\shared\appsettings.Project.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="..\LibSPA\SharedAppSettings\appsettings.SecTest.json" Link="appsettings\shared\appsettings.SecTest.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="..\LibSPA\SharedAppSettings\appsettings.Staging.json" Link="appsettings\shared\appsettings.Staging.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="src\styles\images\2000px-Geico_logo.png">
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\LibSPA\LibSPA.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="appsettings\shared\" />
+		<Folder Include="wwwroot\bundles\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.8" />
+		<PackageReference Include="Microsoft.TypeScript.MSBuild" Version="3.9.5">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Update="NLog.config">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
+	<ProjectExtensions>
+		<VisualStudio>
+			<UserProperties package_1json__JsonSchema="http://json.schemastore.org/project-1.0.0-beta3" />
+		</VisualStudio>
+	</ProjectExtensions>
+
+
+
+</Project>
