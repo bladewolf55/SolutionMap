@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using static System.Console;
+using SolutionReferences.Services;
+using SolutionReferences.Domain.Models;
+using SolutionReferences.Domain.Utilities;
 
 namespace SolutionReferences
 {
