@@ -15,7 +15,7 @@ namespace SolutionReferences.Data.Models
         public string FilePath { get; set; }
 
         // Navigation
-        public List<Project> ParentProjects { get; set; } = new List<Project>();
+        public List<Project> Projects { get; set; } = new List<Project>();
         public Project ProjectReference { get; set; }
 
     }
