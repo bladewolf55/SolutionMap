@@ -4,18 +4,19 @@ using System.Text.Json;
 using System.Xml;
 using SolutionReferences.Domain.Models;
 using SolutionReferences.Domain.Utilities;
+using SolutionReferences.Domain.ServiceInterfaces;
 
 namespace SolutionReferences.Services
 {
-    public class ProjectService
+    public class ProjectService : IProjectService
     {
-        ReferenceService _referenceService;
+        IReferenceService _referenceService;
 
-        public ProjectService()
+        public ProjectService(IReferenceService referenceService = null)
         {
-            _referenceService = new ReferenceService(this);
+            _referenceService = referenceService ?? new ReferenceService(this);
         }
-        
+
         public Project GetVisualStudioProject(string filePath)
         {
             var xmlDocument = new System.Xml.XmlDocument();

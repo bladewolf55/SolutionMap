@@ -4,13 +4,21 @@ using System.Linq;
 using System.Text.Json;
 using SolutionReferences.Domain.Models;
 using SolutionReferences.Domain.Utilities;
+using SolutionReferences.Domain.ServiceInterfaces;
 
 
 namespace SolutionReferences.Services
 {
-    public class SolutionService
+    public class SolutionService : ISolutionService
     {
-        private readonly ProjectService _projectService = new ProjectService();
+        private readonly IProjectService _projectService;
+
+        public SolutionService(IProjectService projectService = null)
+        {
+            _projectService = projectService ?? new ProjectService();
+        }
+
+
         public Solution Parse(string filePath)
         {
             var solution = new Solution();
@@ -26,7 +34,7 @@ namespace SolutionReferences.Services
             throw new ArgumentException("Solution file not supported");
         }
 
-        private Solution ParseVisualStudioSolution(string filePath)
+        public Solution ParseVisualStudioSolution(string filePath)
         {
             Solution solution = new Solution();
             solution.FilePath = filePath;
@@ -74,7 +82,7 @@ namespace SolutionReferences.Services
         /// There's no easy way to determine which references
         /// a project uses, so each project shows all package.json references.
         /// </remarks>
-        private Solution ParseNodeSolution(string filePath)
+        public Solution ParseNodeSolution(string filePath)
         {
             var solution = new Solution();
             solution.FilePath = filePath;
@@ -85,7 +93,8 @@ namespace SolutionReferences.Services
                 solution.Name = packageJson.GetChainedPropertyValue("name");
                 solution.Id = solution.Name;
                 // Aurelia
-                if (packageText.Contains("aurelia")) { 
+                if (packageText.Contains("aurelia"))
+                {
                     solution.SolutionType = "Aurelia";
                     solution.SolutionTypeVersion =
                         packageJson.GetChainedPropertyValue("devDependencies:aurelia-cli")
@@ -97,9 +106,10 @@ namespace SolutionReferences.Services
                     solution.Projects.Add(project);
                 }
                 // Angular
-                else if (packageText.Contains("angular")) {
+                else if (packageText.Contains("angular"))
+                {
                     solution.SolutionType = "Angular";
-                    solution.SolutionTypeVersion = 
+                    solution.SolutionTypeVersion =
                         packageJson.GetChainedPropertyValue(@"devDependencies:@angular/cli")
                         ?? packageJson.GetChainedPropertyValue(@"dependencies:@angular/cli")
                         ?? packageJson.GetChainedPropertyValue(@"devDependencies:@angular/core")
@@ -108,9 +118,9 @@ namespace SolutionReferences.Services
                     var workspaceFolderPath = Path.GetDirectoryName(filePath);
                     var angularFilePath = IOHelpers.CombineToNormalizedPath(workspaceFolderPath, "angular.json");
                     solution.Projects = _projectService.GetAngularProjects(solution, angularFilePath, packageJson);
-                }   
+                }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 throw new Exception($"Error parsing node solution: {ex.GetBaseException().Message}");
             }

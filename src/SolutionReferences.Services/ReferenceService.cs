@@ -4,19 +4,19 @@ using System.Text.Json;
 using System.Xml;
 using SolutionReferences.Domain.Models;
 using SolutionReferences.Domain.Utilities;
+using SolutionReferences.Domain.ServiceInterfaces;
 
 
 namespace SolutionReferences.Services
 {
-    public class ReferenceService
+    public class ReferenceService : IReferenceService
     {
         // Must only be injected, otherwise recursive stack overflow happens.
-        ProjectService _projectService;
-        public ReferenceService(ProjectService projectService)
+        IProjectService _projectService;
+        public ReferenceService(IProjectService projectService)
         {
             _projectService = projectService;
         }
-
 
         public Reference ParseVisualStudioProjectReferenceElement(string projectFolderPath, XmlElement element)
         {
@@ -35,7 +35,7 @@ namespace SolutionReferences.Services
         {
             var reference = new Reference();
             var include = element.GetAttribute("Include");
-            var includeParts = include.Split(",").Select(a => a.Trim()) ;
+            var includeParts = include.Split(",").Select(a => a.Trim());
             reference.Name = includeParts.First();
             bool isLocal = element.GetElementsByTagName("HintPath").Count > 0;
             if (isLocal)
