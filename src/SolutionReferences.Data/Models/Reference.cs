@@ -16,7 +16,7 @@ namespace SolutionReferences.Data.Models
 
         // Navigation
         public List<Project> Projects { get; set; } = new List<Project>();
-        public Project ProjectReference { get; set; }
+        public Project ReferencedProject { get; set; }
 
     }
 }

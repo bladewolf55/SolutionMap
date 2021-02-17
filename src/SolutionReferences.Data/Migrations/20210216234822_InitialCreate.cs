@@ -54,14 +54,14 @@ namespace SolutionReferences.Data.Migrations
                     Version = table.Column<string>(type: "TEXT", nullable: true),
                     ReferenceType = table.Column<string>(type: "TEXT", nullable: true),
                     FilePath = table.Column<string>(type: "TEXT", nullable: true),
-                    ProjectReferenceProjectId = table.Column<string>(type: "TEXT", nullable: true)
+                    ReferencedProjectProjectId = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_References", x => x.ReferenceId);
                     table.ForeignKey(
-                        name: "FK_References_Projects_ProjectReferenceProjectId",
-                        column: x => x.ProjectReferenceProjectId,
+                        name: "FK_References_Projects_ReferencedProjectProjectId",
+                        column: x => x.ReferencedProjectProjectId,
                         principalTable: "Projects",
                         principalColumn: "ProjectId",
                         onDelete: ReferentialAction.Restrict);
@@ -126,9 +126,9 @@ namespace SolutionReferences.Data.Migrations
                 column: "SolutionsSolutionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_References_ProjectReferenceProjectId",
+                name: "IX_References_ReferencedProjectProjectId",
                 table: "References",
-                column: "ProjectReferenceProjectId");
+                column: "ReferencedProjectProjectId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

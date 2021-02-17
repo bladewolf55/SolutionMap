@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SolutionReferences.Data.Models;
 
+
 namespace SolutionReferences.Data
 {
     public class SolutionReferencesDb : DbContext
@@ -14,7 +15,10 @@ namespace SolutionReferences.Data
 
         public SolutionReferencesDb(string connectionString)
         {
-            _connectionString = connectionString ?? "Data Source=solutionReferences.db";
+            // HACK: Find a way to consistently point to the same db
+            var dbPath = @"C:\Users\charl\source\repos\Solution References\src\SolutionReferences.Data\solutionReferences.db";
+
+            _connectionString = connectionString ?? $"Data Source={dbPath}";
         }
 
         public SolutionReferencesDb(DbContextOptions<SolutionReferencesDb> options) : base(options) { }
@@ -22,6 +26,7 @@ namespace SolutionReferences.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite(_connectionString);
+            optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.TrackAll);
             base.OnConfiguring(optionsBuilder);
         }
 
@@ -41,7 +46,7 @@ namespace SolutionReferences.Data
 
             modelBuilder.Entity<Reference>()
                 .ToTable("References")
-                .HasOne(a => a.ProjectReference);
+                .HasOne(a => a.ReferencedProject);                
 
             base.OnModelCreating(modelBuilder);
         }

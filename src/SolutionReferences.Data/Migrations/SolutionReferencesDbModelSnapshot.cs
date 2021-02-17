@@ -96,10 +96,10 @@ namespace SolutionReferences.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("ProjectReferenceProjectId")
+                    b.Property<string>("ReferenceType")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("ReferenceType")
+                    b.Property<string>("ReferencedProjectProjectId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Version")
@@ -107,7 +107,7 @@ namespace SolutionReferences.Data.Migrations
 
                     b.HasKey("ReferenceId");
 
-                    b.HasIndex("ProjectReferenceProjectId");
+                    b.HasIndex("ReferencedProjectProjectId");
 
                     b.ToTable("References");
                 });
@@ -175,11 +175,11 @@ namespace SolutionReferences.Data.Migrations
 
             modelBuilder.Entity("SolutionReferences.Data.Models.Reference", b =>
                 {
-                    b.HasOne("SolutionReferences.Data.Models.Project", "ProjectReference")
+                    b.HasOne("SolutionReferences.Data.Models.Project", "ReferencedProject")
                         .WithMany()
-                        .HasForeignKey("ProjectReferenceProjectId");
+                        .HasForeignKey("ReferencedProjectProjectId");
 
-                    b.Navigation("ProjectReference");
+                    b.Navigation("ReferencedProject");
                 });
 #pragma warning restore 612, 618
         }

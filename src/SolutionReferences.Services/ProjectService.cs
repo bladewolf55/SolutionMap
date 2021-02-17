@@ -19,6 +19,7 @@ namespace SolutionReferences.Services
 
         public Project GetVisualStudioProject(string filePath)
         {
+            var fileName = Path.GetFileNameWithoutExtension(filePath);
             var xmlDocument = new System.Xml.XmlDocument();
             xmlDocument.Load(filePath);
             var xmlRoot = xmlDocument.DocumentElement;
@@ -27,46 +28,49 @@ namespace SolutionReferences.Services
             project.TargetFramework =
                 xmlRoot.GetXmlPropertyValue("TargetFramework")
                 ?? xmlRoot.GetXmlPropertyValue("TargetFrameworkVersion");
-            project.AssemblyName = xmlRoot.GetXmlPropertyValue("AssemblyName", project.Name);
+            project.AssemblyName = xmlRoot.GetXmlPropertyValue("AssemblyName", fileName);
+            project.RootNamespace = xmlRoot.GetXmlPropertyValue("RootNamespace", project.AssemblyName);
             project.Name = project.AssemblyName;
-            project.RootNamespace = xmlRoot.GetXmlPropertyValue("RootNamespace", project.Name);
             project.PackageId = xmlRoot.GetXmlPropertyValue("Version", "1.0.0");
             project.AssemblyVersion = xmlRoot.GetXmlPropertyValue("AssemblyVersion", "1.0.0.0");
             project.AssemblyFileVersion = xmlRoot.GetXmlPropertyValue("AssemblyFileVersion", "1.0.0.0");
             project.Id = $"{ project.Name}-{project.AssemblyVersion}";
 
-            if (xmlRoot.HasAttribute("Sdk"))
+            // Project References
+            var projectReferences = xmlRoot.GetElementsByTagName("ProjectReference");
+            foreach (XmlElement projectReference in projectReferences)
             {
-                // Core
-
+                string projectFolderPath = Path.GetDirectoryName(project.FilePath);
+                var reference = _referenceService
+                    .ParseVisualStudioProjectReferenceElement(projectFolderPath, projectReference);
+                reference.ParentProject = project;
+                project.References.Add(reference);
             }
-            else
+
+            // Package References
+            var packageReferences = xmlRoot.GetElementsByTagName("PackageReference");
+            foreach (XmlElement packageReference in packageReferences)
+            {
+                var reference = _referenceService
+                    .ParseVisualStudioPackageReferenceElement(packageReference);
+                reference.ParentProject = project;
+                project.References.Add(reference);
+            }
+            // Old-style references
+            var oldStyleReferences = xmlRoot.GetElementsByTagName("Reference");
+
+            foreach (XmlElement oldStyleReference in oldStyleReferences)
+            {
+                var reference = _referenceService
+                    .ParseVisualStudioReferenceElement(oldStyleReference);
+                reference.ParentProject = project;
+                project.References.Add(reference);
+            }
+
+            if (!xmlRoot.HasAttribute("Sdk"))
             {
                 // Framework
                 // TODO: Evaluate the .nuspec file
-
-                // Project References
-                var projectReferences = xmlRoot.GetElementsByTagName("ProjectReference");
-                foreach (XmlElement projectReference in projectReferences)
-                {
-                    string projectFolderPath = Path.GetDirectoryName(project.FilePath);
-                    var reference = _referenceService
-                        .ParseVisualStudioProjectReferenceElement(projectFolderPath, projectReference);
-                    reference.ParentProject = project;
-                    project.References.Add(reference);
-
-                }
-
-                // Other references
-                projectReferences = xmlRoot.GetElementsByTagName("Reference");
-
-                foreach (XmlElement projectReference in projectReferences)
-                {
-                    var reference = _referenceService
-                        .ParseVisualStudioReferenceElement(projectReference);
-                    reference.ParentProject = project;
-                    project.References.Add(reference);
-                }
             }
             return project;
         }

@@ -11,7 +11,8 @@ namespace SolutionReferences
 {
     class Program
     {
-        static SolutionService solutionService = new SolutionService();
+        static SolutionService _solutionService = new SolutionService();
+        static SolutionDatabaseService _solutionDatabaseService = new SolutionDatabaseService();
         static void Main(string[] args)
         {
 #if DEBUG
@@ -21,10 +22,20 @@ namespace SolutionReferences
             string rootPath = args[0];
             var solutions = new List<Solution>();
 
+            WriteLine("Getting VS Solutions");
             solutions = solutions.Concat(GetVisualStudioSolutions(rootPath)).ToList();
+            WriteLine("Getting Node Solutions");
             solutions = solutions.Concat(GetNodeSolutions(rootPath)).ToList();
 
-            PrintSolutions(solutions);
+            // Add to database
+            foreach (var solution in solutions)
+            {
+                WriteLine($"Adding {solution.Name}");
+                _solutionDatabaseService.AddSolutionToDatabase(solution);
+            }
+
+            // PrintSolutions(solutions);
+            WriteLine("\r\nFinished");
             ReadLine();
         }
 
@@ -34,7 +45,7 @@ namespace SolutionReferences
             var slnFiles = Directory.GetFiles(rootPath, "*.sln", SearchOption.AllDirectories);
             foreach (var solutionFile in slnFiles)
             {
-                solutions.Add(solutionService.Parse(solutionFile));
+                solutions.Add(_solutionService.Parse(solutionFile));
             }
             return solutions;
         }
@@ -53,7 +64,7 @@ namespace SolutionReferences
                 .ToArray();
             foreach (var file in nodeFiles)
             {
-                solutions.Add(solutionService.Parse(file));
+                solutions.Add(_solutionService.Parse(file));
             }
             return solutions;
         }
@@ -81,12 +92,14 @@ namespace SolutionReferences
             {
                 references = references.Where(a => a.ReferenceType == "Project").ToList();
             }
-            foreach (var reference in project.References)
+            foreach (var reference in project.References
+                .Where(a => a.ReferenceType == "Project")
+                .OrderBy(a => a.Id))
             {
                 PrintProperties(reference, indent);
                 if (reference.ReferenceType == "Project")
                 {
-                    PrintReferences(reference.ProjectReference, indent + 2, true);
+                    PrintReferences(reference.ReferencedProject, indent + 2, true);
                 }
             }
         }

@@ -20,6 +20,6 @@ namespace SolutionReferences.Domain.Models
         public string ReferenceType { get; set; }
         public string FilePath { get; set; }
         public Project ParentProject { get; set; }
-        public Project ProjectReference { get; set; }
+        public Project ReferencedProject { get; set; }
     }
 }
