@@ -23,11 +23,20 @@ namespace SolutionReferences.Services
             var reference = new Reference();
             reference.ReferenceType = "Project";
             reference.FilePath = IOHelpers.CombineToNormalizedPath(projectFolderPath, element.GetAttribute("Include"));
-            reference.ProjectReference = _projectService.GetVisualStudioProject(reference.FilePath);
-            reference.Name = reference.ProjectReference.Name;
-            reference.Version = reference.ProjectReference.AssemblyVersion;
+            reference.ReferencedProject = _projectService.GetVisualStudioProject(reference.FilePath);
+            reference.Name = reference.ReferencedProject.Name;
+            reference.Version = reference.ReferencedProject.AssemblyVersion;
             reference.Id = $"{reference.Name}-{reference.Version}";
+            return reference;
+        }
 
+        public Reference ParseVisualStudioPackageReferenceElement(XmlElement element)
+        {
+            var reference = new Reference();
+            reference.ReferenceType = "Package";
+            reference.Name = element.GetAttribute("Include");
+            reference.Version = element.GetAttribute("Version");
+            reference.Id = $"{reference.Name}-{reference.Version}";
             return reference;
         }
 
@@ -63,6 +72,7 @@ namespace SolutionReferences.Services
             else
             {
                 reference.ReferenceType = "System";
+                reference.Id = reference.Name;
             }
             return reference;
         }

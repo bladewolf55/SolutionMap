@@ -9,6 +9,7 @@ namespace SolutionReferences.Domain.ServiceInterfaces
     {
         List<Reference> ParseNodeReferences(Project project, JsonElement packageJson);
         Reference ParseVisualStudioProjectReferenceElement(string projectFolderPath, XmlElement element);
+        Reference ParseVisualStudioPackageReferenceElement(XmlElement element);
         Reference ParseVisualStudioReferenceElement(XmlElement element);
     }
 }
