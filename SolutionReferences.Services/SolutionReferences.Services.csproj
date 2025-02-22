@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SolutionReferences.Data\SolutionReferences.Data.csproj" />
+    <ProjectReference Include="..\SolutionReferences.Domain\SolutionReferences.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
