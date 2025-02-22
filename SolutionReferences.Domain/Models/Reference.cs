@@ -14,5 +14,5 @@ public class Reference
     public string ReferenceType { get; set; }
     public string FilePath { get; set; }
     public Project ParentProject { get; set; }
-    public Project ReferencedProject { get; set; }
+    public Project ReferencedByProject { get; set; }
 }

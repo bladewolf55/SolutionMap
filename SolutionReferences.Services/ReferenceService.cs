@@ -23,9 +23,9 @@ public class ReferenceService : IReferenceService
         var reference = new Reference();
         reference.ReferenceType = "Project";
         reference.FilePath = IOHelpers.CombineToNormalizedPath(projectFolderPath, element.GetAttribute("Include"));
-        reference.ReferencedProject = _projectService.GetVisualStudioProject(reference.FilePath);
-        reference.Name = reference.ReferencedProject.Name;
-        reference.Version = reference.ReferencedProject.AssemblyVersion;
+        reference.ReferencedByProject = _projectService.GetVisualStudioProject(reference.FilePath);
+        reference.Name = reference.ReferencedByProject.Name;
+        reference.Version = reference.ReferencedByProject.AssemblyVersion;
         reference.Id = $"{reference.Name}-{reference.Version}";
         return reference;
     }

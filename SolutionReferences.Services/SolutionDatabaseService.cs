@@ -68,7 +68,7 @@ public class SolutionDatabaseService : ISolutionDatabaseService
                 dbReference.Projects.Add(dbProject);
 
                 // defer dealing with project reference
-                if (domainReference.ReferencedProject != null)
+                if (domainReference.ReferencedByProject != null)
                 {
                     domainReferencedProjectReferences.Add(domainReference);
                 }
@@ -78,7 +78,7 @@ public class SolutionDatabaseService : ISolutionDatabaseService
         // Add Project References
         foreach (var domainReferencedProjectReference in domainReferencedProjectReferences)
         {
-            var referencedProject = domainReferencedProjectReference.ReferencedProject;
+            var referencedProject = domainReferencedProjectReference.ReferencedByProject;
             var dbReferencedProject = _db.Projects.Find(referencedProject.Id);
             var dbReference = _db.References.Find(domainReferencedProjectReference.Id);
             dbReference.ReferencedByProject = dbReferencedProject;

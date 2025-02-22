@@ -98,7 +98,7 @@ class Program
             PrintProperties(reference, indent);
             if (reference.ReferenceType == "Project")
             {
-                PrintReferences(reference.ReferencedProject, indent + 2, true);
+                PrintReferences(reference.ReferencedByProject, indent + 2, true);
             }
         }
     }
