@@ -1,5 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SolutionReferences.Data.Models;
+using System;
+using System.IO;
+using System.Reflection;
 
 
 namespace SolutionReferences.Data
@@ -15,17 +18,19 @@ namespace SolutionReferences.Data
 
         public SolutionReferencesDb(string connectionString)
         {
-            // HACK: Find a way to consistently point to the same db
-            var dbPath = @"G:\My Drive\Clients\_SM\Solution References\src\SolutionReferences.Data\solutionReferences.db";
-
-            _connectionString = connectionString ?? $"Data Source={dbPath}";
+            //string workingDirectory = Environment.CurrentDirectory;
+            //string solutionDirectory = Directory.GetParent(workingDirectory).Parent.Parent.Parent.FullName;
+            //string projectDirectory = Path.Combine(solutionDirectory, Assembly.GetExecutingAssembly().GetName().Name);  
+            //var dbPath = Path.Combine(projectDirectory,"solutionReferences.db");
+            //_connectionString = connectionString ?? $"Data Source={dbPath}";
         }
 
         public SolutionReferencesDb(DbContextOptions<SolutionReferencesDb> options) : base(options) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite(_connectionString);
+            //optionsBuilder.UseSqlite(_connectionString);
+            optionsBuilder.UseSqlite();
             optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.TrackAll);
             base.OnConfiguring(optionsBuilder);
         }

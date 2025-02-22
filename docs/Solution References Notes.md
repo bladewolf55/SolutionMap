@@ -8,7 +8,12 @@ Initial Project Types to Parse
 *   Angular on Node
 *   Aurelia on .NET
 
+## Migrations
 
+```powershell
+dotnet ef migrations add MigrationName
+dotnet ef database update --connection "DataSource=C:\Users\charl\Downloads\Solution References\SolutionReferences.Data\solutionReferences.db;"
+```
 
 ## Framework
 

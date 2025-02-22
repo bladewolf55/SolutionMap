@@ -15,7 +15,7 @@ class Program
     static void Main(string[] args)
     {
 #if DEBUG
-        string arg1 = @"C:\source\FrontEnd\FrontEnd";
+        string arg1 = @"C:\Projects";
         args = new string[] { arg1 };
 #endif
         string rootPath = args[0];
