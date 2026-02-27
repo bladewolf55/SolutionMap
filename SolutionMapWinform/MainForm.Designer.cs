@@ -124,6 +124,7 @@
             Controls.Add(textBoxSqliteDatabaseFolder);
             Name = "MainForm";
             Text = "SolutionMap";
+            Load += MainForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }
