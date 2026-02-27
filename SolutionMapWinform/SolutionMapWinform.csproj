@@ -9,6 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="LINQPad.Runtime" Version="8.3.7" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3800.47" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\SolutionMap\SolutionMap.csproj" />
   </ItemGroup>
 

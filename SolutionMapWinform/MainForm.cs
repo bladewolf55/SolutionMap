@@ -1,4 +1,6 @@
+using LINQPad;
 using SolutionMap.DataImport;
+using SolutionMap.Domain.Models;
 
 namespace SolutionMapWinform
 {
@@ -45,7 +47,8 @@ namespace SolutionMapWinform
         }
 
         private string GetSqliteDatabaseFilePath() => Path.Combine(textBoxSqliteDatabaseFolder.Text, sqliteDatabaseFileName);
-        
+
+        private string GetSqliteConnectionString() => $"Data Source={GetSqliteDatabaseFilePath()}";
 
         private void Import()
         {
@@ -95,6 +98,16 @@ namespace SolutionMapWinform
             return errors.ToArray();
         }
 
+        private void ShowResults(params object[] results)
+        {
+            var html = Util.ToHtmlString(enableExpansions: true, results);
+            var tempPath = Path.GetTempPath();
+            var temp = Path.Join(tempPath, "solutionMap.html");
+            File.WriteAllText(temp, html);
+            var uri = new Uri(new Uri(temp).AbsoluteUri);
+            webView2Results.Source = uri;
+        }
+
         #endregion
 
 
@@ -122,5 +135,11 @@ namespace SolutionMapWinform
             LoadSettings();
         }
 
+        private void buttonTest_Click(object sender, EventArgs e)
+        {
+            var dataService = new SolutionMap.Database.SolutionMapDb(GetSqliteConnectionString());
+            var solutions = dataService.Solutions.ToList();
+            ShowResults(solutions);
+        }
     }
 }

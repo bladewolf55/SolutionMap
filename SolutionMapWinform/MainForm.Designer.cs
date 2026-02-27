@@ -36,6 +36,9 @@
             buttonSolutionsFolder = new Button();
             buttonImport = new Button();
             textBoxProgress = new TextBox();
+            webView2Results = new Microsoft.Web.WebView2.WinForms.WebView2();
+            buttonTest = new Button();
+            ((System.ComponentModel.ISupportInitialize)webView2Results).BeginInit();
             SuspendLayout();
             // 
             // textBoxSqliteDatabaseFolder
@@ -110,11 +113,35 @@
             textBoxProgress.TabIndex = 7;
             textBoxProgress.WordWrap = false;
             // 
+            // webView2Results
+            // 
+            webView2Results.AllowExternalDrop = true;
+            webView2Results.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            webView2Results.CreationProperties = null;
+            webView2Results.DefaultBackgroundColor = Color.White;
+            webView2Results.Location = new Point(38, 508);
+            webView2Results.Name = "webView2Results";
+            webView2Results.Size = new Size(1206, 421);
+            webView2Results.TabIndex = 8;
+            webView2Results.ZoomFactor = 1D;
+            // 
+            // buttonTest
+            // 
+            buttonTest.Location = new Point(45, 416);
+            buttonTest.Name = "buttonTest";
+            buttonTest.Size = new Size(112, 34);
+            buttonTest.TabIndex = 9;
+            buttonTest.Text = "Test";
+            buttonTest.UseVisualStyleBackColor = true;
+            buttonTest.Click += buttonTest_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(903, 413);
+            ClientSize = new Size(1268, 941);
+            Controls.Add(buttonTest);
+            Controls.Add(webView2Results);
             Controls.Add(textBoxProgress);
             Controls.Add(buttonImport);
             Controls.Add(buttonSolutionsFolder);
@@ -126,6 +153,7 @@
             Name = "MainForm";
             Text = "SolutionMap";
             Load += MainForm_Load;
+            ((System.ComponentModel.ISupportInitialize)webView2Results).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -140,5 +168,7 @@
         private Button buttonSolutionsFolder;
         private Button buttonImport;
         private TextBox textBoxProgress;
+        private Microsoft.Web.WebView2.WinForms.WebView2 webView2Results;
+        private Button buttonTest;
     }
 }
