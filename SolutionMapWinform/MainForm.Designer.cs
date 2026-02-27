@@ -98,14 +98,15 @@
             buttonImport.TabIndex = 6;
             buttonImport.Text = "Import";
             buttonImport.UseVisualStyleBackColor = true;
+            buttonImport.Click += buttonImport_Click;
             // 
             // textBoxProgress
             // 
             textBoxProgress.Location = new Point(234, 128);
             textBoxProgress.Multiline = true;
             textBoxProgress.Name = "textBoxProgress";
-            textBoxProgress.ScrollBars = ScrollBars.Horizontal;
-            textBoxProgress.Size = new Size(632, 231);
+            textBoxProgress.ScrollBars = ScrollBars.Both;
+            textBoxProgress.Size = new Size(632, 261);
             textBoxProgress.TabIndex = 7;
             textBoxProgress.WordWrap = false;
             // 
@@ -113,7 +114,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(903, 401);
+            ClientSize = new Size(903, 413);
             Controls.Add(textBoxProgress);
             Controls.Add(buttonImport);
             Controls.Add(buttonSolutionsFolder);
