@@ -100,12 +100,18 @@ namespace SolutionMapWinform
 
         private void ShowResults(params object[] results)
         {
+            var df = Util.BrowserEngine.GetWebView2DataFolder();
+            var ef = Util.BrowserEngine.GetWebView2ExecutableFolder();
+            
             var html = Util.ToHtmlString(enableExpansions: true, results);
             var tempPath = Path.GetTempPath();
             var temp = Path.Join(tempPath, "solutionMap.html");
             File.WriteAllText(temp, html);
             var uri = new Uri(new Uri(temp).AbsoluteUri);
             webView2Results.Source = uri;
+            Util.DisplayWebPage(html);
+
+            textBox1.Text = html;
         }
 
         #endregion

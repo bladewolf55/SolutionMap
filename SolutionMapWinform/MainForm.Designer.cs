@@ -38,6 +38,7 @@
             textBoxProgress = new TextBox();
             webView2Results = new Microsoft.Web.WebView2.WinForms.WebView2();
             buttonTest = new Button();
+            textBox1 = new TextBox();
             ((System.ComponentModel.ISupportInitialize)webView2Results).BeginInit();
             SuspendLayout();
             // 
@@ -116,12 +117,12 @@
             // webView2Results
             // 
             webView2Results.AllowExternalDrop = true;
-            webView2Results.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            webView2Results.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             webView2Results.CreationProperties = null;
             webView2Results.DefaultBackgroundColor = Color.White;
-            webView2Results.Location = new Point(38, 508);
+            webView2Results.Location = new Point(54, 839);
             webView2Results.Name = "webView2Results";
-            webView2Results.Size = new Size(1206, 421);
+            webView2Results.Size = new Size(1206, 510);
             webView2Results.TabIndex = 8;
             webView2Results.ZoomFactor = 1D;
             // 
@@ -135,11 +136,23 @@
             buttonTest.UseVisualStyleBackColor = true;
             buttonTest.Click += buttonTest_Click;
             // 
+            // textBox1
+            // 
+            textBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            textBox1.Location = new Point(45, 467);
+            textBox1.Multiline = true;
+            textBox1.Name = "textBox1";
+            textBox1.ScrollBars = ScrollBars.Both;
+            textBox1.Size = new Size(1215, 353);
+            textBox1.TabIndex = 11;
+            textBox1.WordWrap = false;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1268, 941);
+            ClientSize = new Size(1268, 1361);
+            Controls.Add(textBox1);
             Controls.Add(buttonTest);
             Controls.Add(webView2Results);
             Controls.Add(textBoxProgress);
@@ -170,5 +183,6 @@
         private TextBox textBoxProgress;
         private Microsoft.Web.WebView2.WinForms.WebView2 webView2Results;
         private Button buttonTest;
+        private TextBox textBox1;
     }
 }
