@@ -109,6 +109,7 @@ public class DataImportService : IDataImportService
         // report
         StringBuilder completedMessage = new();
         int padLeft = 5;
+        completedMessage.AppendLine($"Import complete");
         completedMessage.AppendLine($"Solutions:  {db.Solutions.Count().ToString().PadLeft(padLeft)}");
         completedMessage.AppendLine($"Projects:   {db.Projects.Count().ToString().PadLeft(padLeft)}");
         completedMessage.AppendLine($"References: {db.References.Count().ToString().PadLeft(padLeft)}");

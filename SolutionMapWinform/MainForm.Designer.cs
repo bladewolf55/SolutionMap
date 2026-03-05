@@ -36,9 +36,11 @@
             buttonSolutionsFolder = new Button();
             buttonImport = new Button();
             textBoxProgress = new TextBox();
+            buttonEvaluate = new Button();
+            panel1 = new Panel();
             webView2Results = new Microsoft.Web.WebView2.WinForms.WebView2();
-            buttonTest = new Button();
-            textBox1 = new TextBox();
+            codeEditorBox = new NTextEditor.View.Winforms.CodeEditorBox();
+            panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)webView2Results).BeginInit();
             SuspendLayout();
             // 
@@ -106,7 +108,8 @@
             // 
             // textBoxProgress
             // 
-            textBoxProgress.Location = new Point(234, 128);
+            textBoxProgress.Font = new Font("Cascadia Mono", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBoxProgress.Location = new Point(904, 30);
             textBoxProgress.Multiline = true;
             textBoxProgress.Name = "textBoxProgress";
             textBoxProgress.ScrollBars = ScrollBars.Both;
@@ -114,47 +117,56 @@
             textBoxProgress.TabIndex = 7;
             textBoxProgress.WordWrap = false;
             // 
+            // buttonEvaluate
+            // 
+            buttonEvaluate.Location = new Point(38, 290);
+            buttonEvaluate.Name = "buttonEvaluate";
+            buttonEvaluate.Size = new Size(112, 34);
+            buttonEvaluate.TabIndex = 12;
+            buttonEvaluate.Text = "Run";
+            buttonEvaluate.UseVisualStyleBackColor = true;
+            buttonEvaluate.Click += buttonEvaluate_Click;
+            // 
+            // panel1
+            // 
+            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(webView2Results);
+            panel1.Location = new Point(38, 788);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1498, 561);
+            panel1.TabIndex = 14;
+            // 
             // webView2Results
             // 
             webView2Results.AllowExternalDrop = true;
-            webView2Results.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             webView2Results.CreationProperties = null;
             webView2Results.DefaultBackgroundColor = Color.White;
-            webView2Results.Location = new Point(54, 839);
+            webView2Results.Dock = DockStyle.Fill;
+            webView2Results.Location = new Point(0, 0);
             webView2Results.Name = "webView2Results";
-            webView2Results.Size = new Size(1206, 510);
-            webView2Results.TabIndex = 8;
+            webView2Results.Size = new Size(1496, 559);
+            webView2Results.TabIndex = 9;
             webView2Results.ZoomFactor = 1D;
             // 
-            // buttonTest
+            // codeEditorBox
             // 
-            buttonTest.Location = new Point(45, 416);
-            buttonTest.Name = "buttonTest";
-            buttonTest.Size = new Size(112, 34);
-            buttonTest.TabIndex = 9;
-            buttonTest.Text = "Test";
-            buttonTest.UseVisualStyleBackColor = true;
-            buttonTest.Click += buttonTest_Click;
-            // 
-            // textBox1
-            // 
-            textBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            textBox1.Location = new Point(45, 467);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.ScrollBars = ScrollBars.Both;
-            textBox1.Size = new Size(1215, 353);
-            textBox1.TabIndex = 11;
-            textBox1.WordWrap = false;
+            codeEditorBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            codeEditorBox.Font = new Font("Cascadia Mono", 12F);
+            codeEditorBox.Location = new Point(39, 333);
+            codeEditorBox.Margin = new Padding(6, 6, 6, 6);
+            codeEditorBox.Name = "codeEditorBox";
+            codeEditorBox.Size = new Size(1497, 446);
+            codeEditorBox.TabIndex = 15;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1268, 1361);
-            Controls.Add(textBox1);
-            Controls.Add(buttonTest);
-            Controls.Add(webView2Results);
+            ClientSize = new Size(1566, 1361);
+            Controls.Add(codeEditorBox);
+            Controls.Add(panel1);
+            Controls.Add(buttonEvaluate);
             Controls.Add(textBoxProgress);
             Controls.Add(buttonImport);
             Controls.Add(buttonSolutionsFolder);
@@ -166,6 +178,7 @@
             Name = "MainForm";
             Text = "SolutionMap";
             Load += MainForm_Load;
+            panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)webView2Results).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -181,8 +194,9 @@
         private Button buttonSolutionsFolder;
         private Button buttonImport;
         private TextBox textBoxProgress;
+        private Button buttonEvaluate;
+        private Panel panel1;
         private Microsoft.Web.WebView2.WinForms.WebView2 webView2Results;
-        private Button buttonTest;
-        private TextBox textBox1;
+        private NTextEditor.View.Winforms.CodeEditorBox codeEditorBox;
     }
 }

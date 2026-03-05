@@ -1,4 +1,6 @@
 using LINQPad;
+using NTextEditor.Languages.CSharp;
+using NTextEditor.View.Winforms;
 using SolutionMap.DataImport;
 using SolutionMap.Domain.Models;
 
@@ -10,6 +12,7 @@ namespace SolutionMapWinform
         public MainForm()
         {
             InitializeComponent();
+            codeEditorBox.SetLanguageToCSharp(isLibrary: false);
         }
 
         #region "Methods"
@@ -98,20 +101,25 @@ namespace SolutionMapWinform
             return errors.ToArray();
         }
 
-        private void ShowResults(params object[] results)
+        private async void ShowResults(params object[] results)
         {
             var df = Util.BrowserEngine.GetWebView2DataFolder();
             var ef = Util.BrowserEngine.GetWebView2ExecutableFolder();
-            
+
             var html = Util.ToHtmlString(enableExpansions: true, results);
+            // initialize
+            //webView2Results.Source = new Uri("about:blank");
+            //await webView2Results.EnsureCoreWebView2Async();
+            // show
+            //webView2Results.NavigateToString(html);
+
+
             var tempPath = Path.GetTempPath();
             var temp = Path.Join(tempPath, "solutionMap.html");
             File.WriteAllText(temp, html);
             var uri = new Uri(new Uri(temp).AbsoluteUri);
+            webView2Results.Source = new Uri("about:blank");
             webView2Results.Source = uri;
-            Util.DisplayWebPage(html);
-
-            textBox1.Text = html;
         }
 
         #endregion
@@ -146,6 +154,26 @@ namespace SolutionMapWinform
             var dataService = new SolutionMap.Database.SolutionMapDb(GetSqliteConnectionString());
             var solutions = dataService.Solutions.ToList();
             ShowResults(solutions);
+        }
+
+        private void buttonEvaluate_Click(object sender, EventArgs e)
+        {
+            var script = codeEditorBox.GetText();
+            var options = Microsoft.CodeAnalysis.Scripting.ScriptOptions.Default
+                .AddReferences(typeof(Solution).Assembly)
+                .AddImports("System", "System.Linq", "SolutionMap.Domain.Models", "SolutionMap.Database");
+            var cn = GetSqliteConnectionString().Replace(@"\", @"\\");
+            var dbCode = $@"var db = new SolutionMap.Database.SolutionMapDb(""{cn}"");";
+            script = dbCode + Environment.NewLine + script;
+            try
+            {
+                var results = Microsoft.CodeAnalysis.CSharp.Scripting.CSharpScript.EvaluateAsync(script, options).Result;
+                ShowResults(results);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Script Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

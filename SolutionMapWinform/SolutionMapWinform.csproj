@@ -10,7 +10,10 @@
 
   <ItemGroup>
     <PackageReference Include="LINQPad.Runtime" Version="8.3.7" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="5.0.0" />
     <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3800.47" />
+    <PackageReference Include="NTextEditor.Languages.CSharp" Version="1.0.1" />
+    <PackageReference Include="NTextEditor.View.WinForms" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>
