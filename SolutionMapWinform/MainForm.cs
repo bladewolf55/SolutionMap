@@ -1,9 +1,12 @@
 using LINQPad;
+using Microsoft.CodeAnalysis.CSharp.Scripting;
+using Microsoft.CodeAnalysis.Scripting;
 using NTextEditor.Languages.CSharp;
 using NTextEditor.View.Winforms;
 using SolutionMap.DataImport;
 using SolutionMap.Domain.Models;
 using SolutionMapWinform.Properties;
+using System.Text;
 
 namespace SolutionMapWinform
 {
@@ -22,11 +25,17 @@ namespace SolutionMapWinform
             codeEditorBox.SetLanguageToCSharp(isLibrary: false);
             codeEditorBox.Dock = DockStyle.Fill;
             webView2Results.Dock = DockStyle.Fill;
+            textBoxOutput.Dock = DockStyle.Fill;
+            tabControlResults.Dock = DockStyle.Fill;
             panelWebView.Dock = DockStyle.Fill;
             splitContainer.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
+
+
             SetStatus();
             // TODO: Why can't this control receive focus? .CanFocus = false.
             codeEditorBox.Focus();
+
+            Console.SetOut(new ControlWriter(textBoxOutput));
         }
 
         private string GetSqliteConnectionString() => $"Data Source={AppSettings.GetSqliteDatabaseFilePath()}";
@@ -74,14 +83,15 @@ namespace SolutionMapWinform
 
         private void Evaluate()
         {
+            textBoxOutput.Clear();
             var script = codeEditorBox.GetText();
-            var options = Microsoft.CodeAnalysis.Scripting.ScriptOptions.Default
+            var options = ScriptOptions.Default
                 .AddReferences(typeof(Solution).Assembly)
                 .AddImports("System", "System.Linq", "SolutionMap.Domain.Models", "SolutionMap.Database");
             var cn = GetSqliteConnectionString().Replace(@"\", @"\\");
             var dbCode = $@"var db = new SolutionMap.Database.SolutionMapDb(""{cn}"");";
             script = dbCode + Environment.NewLine + script;
-            var results = Microsoft.CodeAnalysis.CSharp.Scripting.CSharpScript.EvaluateAsync(script, options).Result;
+            var results = CSharpScript.EvaluateAsync(script, options).Result;
             ShowResults(results);
         }
 
@@ -142,5 +152,29 @@ namespace SolutionMapWinform
         }
 
         #endregion
+    }
+}
+
+
+// Source - https://stackoverflow.com/a/18727100
+// Posted by Servy, modified by community. See post 'Timeline' for change history
+// Retrieved 2026-03-14, License - CC BY-SA 3.0
+
+public class ControlWriter : TextWriter
+{
+    private Control textbox;
+    public ControlWriter(Control textbox)
+    {
+        this.textbox = textbox;
+    }
+
+    public override void WriteLine(string? value)
+    {
+        textbox.Text += value + Environment.NewLine;
+    }
+
+    public override Encoding Encoding
+    {
+        get { return Encoding.ASCII; }
     }
 }
